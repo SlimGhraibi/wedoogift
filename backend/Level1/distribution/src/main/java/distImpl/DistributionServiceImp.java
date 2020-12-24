@@ -5,6 +5,7 @@ import entities.Companie;
 import entities.Distribution;
 import entities.User;
 import org.json.JSONObject;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,8 +27,12 @@ public class DistributionServiceImp implements DistributionService {
     }
 
     @Override
-    public void calculateUserBalance(JSONObject object) {
-
+    public void calculateUserBalance(List<Distribution> distList, List<User> userList) {
+        User user;
+        for (Distribution dist : distList) {
+            user = Utils.getUserByID(userList, dist.getUser_id());
+            user.setBalance(dist.getAmount() + user.getBalance());
+        }
     }
 
     private Distribution getDistribution(User user, Companie companie, float amount) {
@@ -36,7 +41,7 @@ public class DistributionServiceImp implements DistributionService {
         Calendar c = Calendar.getInstance();
         c.setTime(today);
         c.add(Calendar.YEAR, 1);
-        distribution = new Distribution(idDistribution ++, amount, new Date(), c.getTime(), companie.getId(), user.getId());
+        distribution = new Distribution(idDistribution++, amount, new Date(), c.getTime(), companie.getId(), user.getId());
 
         return distribution;
     }
@@ -44,6 +49,5 @@ public class DistributionServiceImp implements DistributionService {
     private Boolean checkCompanieBalance(Companie company, float amount) {
         return company.getBalance() >= amount;
     }
-
 
 }

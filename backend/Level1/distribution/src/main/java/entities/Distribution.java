@@ -66,4 +66,16 @@ public class Distribution {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", start_date=" + start_date +
+                ", end_date=" + end_date +
+                ", company_id=" + company_id +
+                ", user_id=" + user_id +
+                '}';
+    }
 }
