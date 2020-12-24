@@ -1,10 +1,13 @@
 package dist;
 
 
+import entities.User;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public interface Distribution {
-    public void distributeGiftCards(JSONObject object);
+    public List<User> distributeGiftCards(JSONObject object);
 
     public void calculateUserBalance(JSONObject object);
 }
