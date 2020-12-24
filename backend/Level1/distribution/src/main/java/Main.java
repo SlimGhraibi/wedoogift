@@ -1,8 +1,13 @@
-import distImpl.DistributionImp;
+import distImpl.DistributionServiceImp;
+import entities.Companie;
+import entities.Distribution;
+import entities.User;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import utils.Utils;
 
 import java.io.InputStream;
+import java.util.List;
 
 public class Main {
 
@@ -14,7 +19,9 @@ public class Main {
         }
         JSONTokener tokener = new JSONTokener(is);
         JSONObject object = new JSONObject(tokener);
-        DistributionImp distributionImp = new DistributionImp();
-        distributionImp.distributeGiftCards(object);
+        DistributionServiceImp distributionImp = new DistributionServiceImp();
+        List<User> userList = Utils.getUsers(object);
+        List<Companie> companieList = Utils.getCompany(object);
+        Distribution dist = distributionImp.distributeGiftCards(companieList.get(0), userList.get(0), 50);
     }
 }
