@@ -43,7 +43,6 @@ public class Main {
             if (user.getId() == 3) {
                 dist = distributionImp.distributeGiftCards(companieList.get(1), userList.get(2), 1000);
                 distributions.add(dist);
-                System.out.println(dist.getStart_date());
             }
         });
 
