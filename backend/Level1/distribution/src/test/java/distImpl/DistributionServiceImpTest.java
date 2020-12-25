@@ -1,19 +1,20 @@
 package distImpl;
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Companie;
 import entities.Distribution;
 import entities.User;
+
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ class DistributionServiceImpTest {
     Distribution distribution;
 
     @BeforeEach
-    public void init() throws IOException {
+    public void init() {
         user = new User(1L, 100);
         companie = new Companie(1L, 1000, "Wedoogift");
         distributionServiceImp = new DistributionServiceImp();
