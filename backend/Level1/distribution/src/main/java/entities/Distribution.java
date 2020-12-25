@@ -69,7 +69,7 @@ public class Distribution {
 
     @Override
     public String toString() {
-        return "{" +
+        return "Distribution{" +
                 "id=" + id +
                 ", amount=" + amount +
                 ", start_date=" + start_date +

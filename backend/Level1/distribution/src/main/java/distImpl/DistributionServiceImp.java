@@ -42,7 +42,6 @@ public class DistributionServiceImp implements DistributionService {
         c.setTime(today);
         c.add(Calendar.YEAR, 1);
         distribution = new Distribution(idDistribution++, amount, new Date(), c.getTime(), companie.getId(), user.getId());
-
         return distribution;
     }
 

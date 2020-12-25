@@ -34,4 +34,13 @@ public class Companie {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Companie{" +
+                "id=" + id +
+                ", balance=" + balance +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
