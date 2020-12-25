@@ -49,17 +49,16 @@ public class Main {
         distributionImp.calculateUserBalance(distributions, userList);
 
         try {
-            // create a map
             Map<String, Object> map = new HashMap<>();
             map.put("distributions", distributions);
             map.put("companies", companieList);
             map.put("users", userList);
 
-            // create object mapper instance
             ObjectMapper mapper = new ObjectMapper();
 
-            // convert map to JSON file
+            // affichage dans un fichier output
             mapper.writeValue(Paths.get(output).toFile(), map);
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
