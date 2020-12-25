@@ -12,13 +12,11 @@ import java.util.List;
 
 public class DistributionServiceImp implements DistributionService {
 
-    static Long idDistribution = 1L;
-
     @Override
     public Distribution distributeGiftCards(Companie companie, User user, float amount) {
-        if (checkCompanieBalance(companie, amount)) {
+        if (Utils.checkCompanieBalance(companie, amount)) {
             companie.setBalance(companie.getBalance() - amount);
-            return getDistribution(user, companie, amount);
+            return Utils.getDistribution(user, companie, amount);
         }
         return null;
     }
@@ -30,20 +28,6 @@ public class DistributionServiceImp implements DistributionService {
             user = Utils.getUserByID(userList, dist.getUser_id());
             user.setBalance(dist.getAmount() + user.getBalance());
         }
-    }
-
-    private Distribution getDistribution(User user, Companie companie, float amount) {
-        Distribution distribution = null;
-        Date today = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(today);
-        c.add(Calendar.DAY_OF_MONTH, 364);
-        distribution = new Distribution(idDistribution++, amount, today, c.getTime(), companie.getId(), user.getId());
-        return distribution;
-    }
-
-    private Boolean checkCompanieBalance(Companie company, float amount) {
-        return company.getBalance() >= amount;
     }
 
 }

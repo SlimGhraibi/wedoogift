@@ -9,10 +9,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class Utils {
+
+    static Long idDistribution = 1L;
+
     public static List<User> getUsers(JSONObject object) {
         List<User> userList = new ArrayList();
         object.getJSONArray("users").forEach(user -> {
@@ -62,5 +66,19 @@ public class Utils {
 
     public static User getUserByID(List<User> list, Long id) {
         return list.stream().filter(user -> user.getId() == id).findFirst().get();
+    }
+
+    public static Distribution getDistribution(User user, Companie companie, float amount) {
+        Distribution distribution = null;
+        Date today = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        c.add(Calendar.DAY_OF_MONTH, 364);
+        distribution = new Distribution(idDistribution++, amount, today, c.getTime(), companie.getId(), user.getId());
+        return distribution;
+    }
+
+    public static Boolean checkCompanieBalance(Companie company, float amount) {
+        return company.getBalance() >= amount;
     }
 }
