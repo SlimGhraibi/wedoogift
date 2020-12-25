@@ -4,10 +4,7 @@ import dist.DistributionService;
 import entities.Companie;
 import entities.Distribution;
 import entities.User;
-import org.json.JSONObject;
 import utils.Utils;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +37,8 @@ public class DistributionServiceImp implements DistributionService {
         Date today = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(today);
-        c.add(Calendar.YEAR, 1);
-        distribution = new Distribution(idDistribution++, amount, new Date(), c.getTime(), companie.getId(), user.getId());
+        c.add(Calendar.DAY_OF_MONTH, 364);
+        distribution = new Distribution(idDistribution++, amount, today, c.getTime(), companie.getId(), user.getId());
         return distribution;
     }
 

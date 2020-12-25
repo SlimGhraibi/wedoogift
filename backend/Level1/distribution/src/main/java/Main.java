@@ -5,7 +5,6 @@ import entities.Distribution;
 import entities.User;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.json.simple.JSONArray;
 import utils.Utils;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         String input = "data/input.json";
-        String output = "src/output.json";
+        String output = "output.json";
         InputStream is = Main.class.getResourceAsStream(input);
         if (is == null) {
             throw new NullPointerException("Cannot find resource file " + input);
@@ -31,7 +30,6 @@ public class Main {
         List<Distribution> distributions = new ArrayList<>();
 
         userList.forEach(user -> {
-
             // d'aprés l'input
             Distribution dist;
             if (user.getId() == 1) {
@@ -45,6 +43,7 @@ public class Main {
             if (user.getId() == 3) {
                 dist = distributionImp.distributeGiftCards(companieList.get(1), userList.get(2), 1000);
                 distributions.add(dist);
+                System.out.println(dist.getStart_date());
             }
         });
 
@@ -61,7 +60,7 @@ public class Main {
             ObjectMapper mapper = new ObjectMapper();
 
             // convert map to JSON file
-            mapper.writeValue(Paths.get("output.json").toFile(), map);
+            mapper.writeValue(Paths.get(output).toFile(), map);
 
         } catch (Exception ex) {
             ex.printStackTrace();
