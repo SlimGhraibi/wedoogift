@@ -23,17 +23,16 @@ public class DistributionServiceImp implements DistributionService {
         User user;
         for (Distribution dist : distList) {
             user = Utils.getUserByID(userList, dist.getUser_id());
-
-            if (user.getBalance().size() == 0 || !Utils.checkWalletId(user.getBalance(), dist.getWallet_id())) {
-                List<Balance> b = new ArrayList<>();
-                b.add(new Balance(dist.getWallet_id(), dist.getAmount()));
-                user.setBalance(b);
-            } else {
+            if (Utils.checkWalletId(user.getBalance(), dist.getWallet_id())) {
                 user.getBalance().forEach(balance -> {
                     if (balance.getWallet_id() == dist.getWallet_id()) {
                         balance.setAmount(balance.getAmount() + dist.getAmount());
                     }
                 });
+            } else {
+                List<Balance> b = new ArrayList<>();
+                b.add(new Balance(dist.getWallet_id(), dist.getAmount()));
+                user.getBalance().addAll(b);
             }
         }
     }
