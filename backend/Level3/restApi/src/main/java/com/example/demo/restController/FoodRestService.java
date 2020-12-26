@@ -1,21 +1,23 @@
 package com.example.demo.restController;
 
 import com.example.demo.services.FoodService;
-import distImpl.DistributionServiceFoodImp;
 import entities.Companie;
 import entities.Distribution;
 import entities.User;
 import entities.Wallet;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import utils.Utils;
 import utils.UtilsFood;
 
 import javax.annotation.security.RolesAllowed;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,13 +32,17 @@ public class FoodRestService {
     List<Companie> companieList;
     List<Distribution> distributions;
     List<Wallet> walletList;
-    String output;
 
+
+    @Autowired
     FoodService foodService;
+
+    @Autowired
+    ResourceLoader resourceLoader;
 
     @RolesAllowed("ADMIN")
     @GetMapping
-    public Map<String, Object> getFood(){
+    public Map<String, Object> getFood() throws IOException {
         init();
         // Création des distributions d'aprés l'input
         userList.forEach(user -> {
@@ -64,13 +70,12 @@ public class FoodRestService {
         return map;
     }
 
-    public void init() {
-        String input = "data/inputFood.json";
-        output = "outputFood.json";
-        InputStream is = getClass().getResourceAsStream(input);
+    public void init() throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:data/inputFood.json");
+        InputStream is = resource.getInputStream();
 
         if (is == null) {
-            throw new NullPointerException("Cannot find resource file " + input);
+            throw new NullPointerException("Cannot find resource file " + resource);
         }
         JSONTokener tokener = new JSONTokener(is);
         JSONObject object = new JSONObject(tokener);

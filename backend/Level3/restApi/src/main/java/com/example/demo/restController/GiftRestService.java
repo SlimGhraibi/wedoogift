@@ -6,6 +6,9 @@ import entities.Distribution;
 import entities.User;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import utils.Utils;
 
 import javax.annotation.security.RolesAllowed;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -26,11 +30,16 @@ public class GiftRestService {
     List<User> userList;
     List<Companie> companieList;
     List<Distribution> distributions;
+
+    @Autowired
     GiftService giftService;
+
+    @Autowired
+    ResourceLoader resourceLoader;
 
     @RolesAllowed("ADMIN")
     @GetMapping
-    public Map<String, Object> getFood() {
+    public Map<String, Object> getFood() throws IOException {
         init();
         // Création des distributions d'aprés l'input
         userList.forEach(user -> {
@@ -56,13 +65,14 @@ public class GiftRestService {
         return map;
     }
 
-    public void init() {
-        String input = "data/inputGift.json";
-        InputStream inputStream = getClass().getResourceAsStream(input);
-            if (inputStream == null) {
-                throw new NullPointerException("Cannot find resource file " + input);
-            }
-            JSONTokener tokener = new JSONTokener(inputStream);
+    public void init() throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:data/inputGift.json");
+        InputStream is = resource.getInputStream();
+
+        if (is == null) {
+            throw new NullPointerException("Cannot find resource file " + resource);
+        }
+            JSONTokener tokener = new JSONTokener(is);
             JSONObject object = new JSONObject(tokener);
             userList = Utils.getUsers(object);
             companieList = Utils.getCompany(object);

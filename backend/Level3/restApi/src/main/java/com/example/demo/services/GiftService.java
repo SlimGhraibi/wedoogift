@@ -3,8 +3,10 @@ package com.example.demo.services;
 import entities.Companie;
 import entities.Distribution;
 import entities.User;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 
 public interface GiftService {
     public Distribution distributeGiftCards(Companie companie, User user, float amount);

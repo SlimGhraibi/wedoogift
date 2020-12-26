@@ -4,6 +4,7 @@ import entities.Companie;
 import entities.Distribution;
 import entities.User;
 import entities.Wallet;
+
 import java.util.List;
 
 public interface FoodService {
