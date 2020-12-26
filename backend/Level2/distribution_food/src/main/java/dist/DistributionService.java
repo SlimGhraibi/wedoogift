@@ -1,13 +1,9 @@
 package dist;
-
-
 import entities.Companie;
 import entities.Distribution;
 import entities.User;
-import org.json.JSONObject;
-
-import java.util.List;
+import entities.Wallet;
 
 public interface DistributionService {
-    public Distribution distributefoodCards(Companie companie, User user, float amount);
+    public Distribution distributefoodCards(Companie companie, User user, Wallet wallet, float amount);
 }
