@@ -23,7 +23,7 @@ public class MainFood {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         String input = "data/inputFood.json";
-        String output = "output.json";
+        String output = "outputFood.json";
         InputStream is = MainFood.class.getResourceAsStream(input);
 
         if (is == null) {
