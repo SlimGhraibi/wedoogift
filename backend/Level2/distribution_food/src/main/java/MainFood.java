@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import utils.Utils;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.nio.file.Paths;
@@ -20,24 +19,32 @@ import java.util.Map;
 
 public class MainFood {
 
-    public static void main(String[] args) {
+    List<User> userList;
+    List<Companie> companieList;
+    List<Distribution> distributions;
+    List<Wallet> walletList;
+    DistributionServiceImp distributionImp;
+    String output;
+
+    public void init() {
         String input = "data/inputFood.json";
-        String output = "outputFood.json";
+        output = "outputFood.json";
         InputStream is = MainFood.class.getResourceAsStream(input);
 
         if (is == null) {
             throw new NullPointerException("Cannot find resource file " + input);
         }
-
         JSONTokener tokener = new JSONTokener(is);
         JSONObject object = new JSONObject(tokener);
-        DistributionServiceImp distributionImp = new DistributionServiceImp();
+        userList = Utils.getUsers(object);
+        companieList = Utils.getCompanies(object);
+        walletList = Utils.getWallets(object);
+        distributions = new ArrayList<>();
+    }
 
-        List<User> userList = Utils.getUsers(object);
-        List<Companie> companieList = Utils.getCompanies(object);
-        List<Wallet> walletList = Utils.getWallets(object);
-        List<Distribution> distributions = new ArrayList<>();
-
+    public void createDistribution() {
+        distributionImp = new DistributionServiceImp();
+        // Création des distributions d'aprés l'input
         // Création des distributions d'aprés l'input
         userList.forEach(user -> {
             Distribution dist;
@@ -56,9 +63,13 @@ public class MainFood {
                 distributions.add(dist);
             }
         });
+    }
 
+    public void calculateUserBalance() {
         distributionImp.calculateUserBalance(distributions, userList);
+    }
 
+    public void outputResult() {
         try {
             Map<String, Object> map = new HashMap<>();
             map.put("distributions", distributions);
@@ -66,13 +77,19 @@ public class MainFood {
             map.put("users", userList);
 
             ObjectMapper mapper = new ObjectMapper();
-
             // affichage dans un fichier output
             mapper.writeValue(Paths.get(output).toFile(), map);
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
 
+    public static void main(String[] args) {
+        MainFood mainGift = new MainFood();
+        mainGift.init();
+        mainGift.createDistribution();
+        mainGift.calculateUserBalance();
+        mainGift.outputResult();
     }
 }

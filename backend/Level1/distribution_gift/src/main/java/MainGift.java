@@ -13,24 +13,28 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class MainGift {
+    List<User> userList;
+    List<Companie> companieList;
+    List<Distribution> distributions;
+    DistributionServiceImp distributionImp;
+    String output;
 
-    public static void main(String[] args) {
+    public void init() {
         String input = "data/inputGift.json";
-        String output = "outputGift.json";
+        output = "outputGift.json";
         InputStream is = MainGift.class.getResourceAsStream(input);
-
         if (is == null) {
             throw new NullPointerException("Cannot find resource file " + input);
         }
-
         JSONTokener tokener = new JSONTokener(is);
         JSONObject object = new JSONObject(tokener);
-        DistributionServiceImp distributionImp = new DistributionServiceImp();
+        userList = Utils.getUsers(object);
+        companieList = Utils.getCompany(object);
+        distributions = new ArrayList<>();
+    }
 
-        List<User> userList = Utils.getUsers(object);
-        List<Companie> companieList = Utils.getCompany(object);
-        List<Distribution> distributions = new ArrayList<>();
-
+    public void createDistribution() {
+        distributionImp = new DistributionServiceImp();
         // Création des distributions d'aprés l'input
         userList.forEach(user -> {
             Distribution dist;
@@ -47,9 +51,13 @@ public class MainGift {
                 distributions.add(dist);
             }
         });
+    }
 
+    public void calculateUserBalance() {
         distributionImp.calculateUserBalance(distributions, userList);
+    }
 
+    public void outputResult() {
         try {
             Map<String, Object> map = new HashMap<>();
             map.put("distributions", distributions);
@@ -65,5 +73,13 @@ public class MainGift {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        MainGift mainGift = new MainGift();
+        mainGift.init();
+        mainGift.createDistribution();
+        mainGift.calculateUserBalance();
+        mainGift.outputResult();
     }
 }
