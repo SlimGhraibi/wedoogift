@@ -17,7 +17,7 @@ import java.util.*;
 
 public class MainGift {
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) {
         String input = "data/inputGift.json";
         String output = "outputGift.json";
         InputStream is = MainGift.class.getResourceAsStream(input);

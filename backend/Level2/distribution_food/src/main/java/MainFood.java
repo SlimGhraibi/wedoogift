@@ -12,7 +12,6 @@ import utils.Utils;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +20,7 @@ import java.util.Map;
 
 public class MainFood {
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) {
         String input = "data/inputFood.json";
         String output = "outputFood.json";
         InputStream is = MainFood.class.getResourceAsStream(input);
