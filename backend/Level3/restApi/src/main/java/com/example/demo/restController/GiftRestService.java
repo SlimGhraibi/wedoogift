@@ -1,24 +1,23 @@
 package com.example.demo.restController;
 
 import com.example.demo.services.GiftService;
-import distImpl.DistributionServiceImp;
 import entities.Companie;
 import entities.Distribution;
 import entities.User;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import utils.Utils;
 
-
+import javax.annotation.security.RolesAllowed;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/gift")
@@ -27,10 +26,9 @@ public class GiftRestService {
     List<User> userList;
     List<Companie> companieList;
     List<Distribution> distributions;
-    String output;
-
     GiftService giftService;
 
+    @RolesAllowed("ADMIN")
     @GetMapping
     public Map<String, Object> getFood() {
         init();
@@ -59,13 +57,12 @@ public class GiftRestService {
     }
 
     public void init() {
-            String input = "data/inputGift.json";
-            output = "outputGift.json";
-            InputStream is = GiftRestService.class.getResourceAsStream(input);
-            if (is == null) {
+        String input = "data/inputGift.json";
+        InputStream inputStream = getClass().getResourceAsStream(input);
+            if (inputStream == null) {
                 throw new NullPointerException("Cannot find resource file " + input);
             }
-            JSONTokener tokener = new JSONTokener(is);
+            JSONTokener tokener = new JSONTokener(inputStream);
             JSONObject object = new JSONObject(tokener);
             userList = Utils.getUsers(object);
             companieList = Utils.getCompany(object);
