@@ -1,5 +1,6 @@
 package utils;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import entities.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,5 +82,11 @@ public class Utils {
 
     public static Boolean checkCompanieBalance(Companie company, float amount) {
         return company.getBalance() >= amount;
+    }
+
+    public static Boolean checkWalletId(List<Balance> balances, Long walletId) {
+        return balances.stream()
+                .anyMatch(t -> t.getWallet_id().equals(walletId));
+
     }
 }

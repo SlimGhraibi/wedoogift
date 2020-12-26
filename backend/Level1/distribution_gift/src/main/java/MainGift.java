@@ -34,8 +34,8 @@ public class MainGift {
         List<Companie> companieList = Utils.getCompany(object);
         List<Distribution> distributions = new ArrayList<>();
 
+        // Création des distributions d'aprés l'input
         userList.forEach(user -> {
-            // d'aprés l'input
             Distribution dist;
             if (user.getId() == 1) {
                 dist = distributionImp.distributeGiftCards(companieList.get(0), userList.get(0), 50);
