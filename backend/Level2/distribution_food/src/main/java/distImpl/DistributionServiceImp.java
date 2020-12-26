@@ -1,11 +1,11 @@
 package distImpl;
 
 import dist.DistributionService;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
-import entities.Wallet;
+import entities.*;
 import utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DistributionServiceImp implements DistributionService {
 
@@ -16,5 +16,24 @@ public class DistributionServiceImp implements DistributionService {
             return Utils.getDistribution(user, companie, wallet, amount);
         }
         return null;
+    }
+
+    @Override
+    public void calculateUserBalance(List<Distribution> distList, List<User> userList) {
+        User user;
+        for (Distribution dist : distList) {
+            user = Utils.getUserByID(userList, dist.getUser_id());
+            if (user.getBalance().size() == 0) {
+                List<Balance> b = new ArrayList<>();
+                b.add(new Balance(dist.getWallet_id(), dist.getAmount()));
+                user.setBalance(b);
+            } else {
+                user.getBalance().forEach(balance -> {
+                    if (balance.getWallet_id() == dist.getWallet_id()) {
+                        balance.setAmount(balance.getAmount() + dist.getAmount());
+                    }
+                });
+            }
+        }
     }
 }
