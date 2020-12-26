@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DistributionServiceImpTest {
-    DistributionServiceImp distributionServiceImp;
+    DistributionServiceFoodImp distributionServiceImp;
     User user;
     Balance balance;
     Companie companie;
@@ -25,7 +25,7 @@ class DistributionServiceImpTest {
         user = new User(1L, balances);
         companie = new Companie(1L, 1000, "Wedoogift");
         wallet = new Wallet(1L, "gift cards", "GIFT");
-        distributionServiceImp = new DistributionServiceImp();
+        distributionServiceImp = new DistributionServiceFoodImp();
     }
 
     @Test

@@ -7,8 +7,8 @@ import entities.Wallet;
 
 import java.util.List;
 
-public interface DistributionService {
+public interface DistributionServiceFood {
     public Distribution distributefoodCards(Companie companie, User user, Wallet wallet, float amount);
-    public void calculateUserBalance(List<Distribution> distList, List<User> userList);
+    public List<User> calculateUserBalance(List<Distribution> distList, List<User> userList);
 }
 

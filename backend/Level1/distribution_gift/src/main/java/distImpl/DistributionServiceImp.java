@@ -20,12 +20,13 @@ public class DistributionServiceImp implements DistributionService {
     }
 
     @Override
-    public void calculateUserBalance(List<Distribution> distList, List<User> userList) {
+    public List<User> calculateUserBalance(List<Distribution> distList, List<User> userList) {
         User user;
         for (Distribution dist : distList) {
             user = Utils.getUserByID(userList, dist.getUser_id());
             user.setBalance(dist.getAmount() + user.getBalance());
         }
+        return userList;
     }
 
 }

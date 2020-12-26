@@ -54,10 +54,13 @@ public class MainGift {
     }
 
     public void calculateUserBalance() {
-        distributionImp.calculateUserBalance(distributions, userList);
+        userList = distributionImp.calculateUserBalance(distributions, userList);
     }
 
-    public void outputResult() {
+    public Map<String, Object> outputResult() {
+        init();
+        createDistribution();
+        calculateUserBalance();
         try {
             Map<String, Object> map = new HashMap<>();
             map.put("distributions", distributions);
@@ -68,18 +71,15 @@ public class MainGift {
 
             // affichage dans un fichier output
             mapper.writeValue(Paths.get(output).toFile(), map);
-
-
+            return map;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return null;
         }
     }
 
     public static void main(String[] args) {
         MainGift mainGift = new MainGift();
-        mainGift.init();
-        mainGift.createDistribution();
-        mainGift.calculateUserBalance();
         mainGift.outputResult();
     }
 }

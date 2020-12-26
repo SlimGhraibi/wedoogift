@@ -1,6 +1,6 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import distImpl.DistributionServiceImp;
+import distImpl.DistributionServiceFoodImp;
 import entities.Companie;
 import entities.Distribution;
 import entities.User;
@@ -23,7 +23,7 @@ public class MainFood {
     List<Companie> companieList;
     List<Distribution> distributions;
     List<Wallet> walletList;
-    DistributionServiceImp distributionImp;
+    DistributionServiceFoodImp distributionImp;
     String output;
 
     public void init() {
@@ -43,7 +43,7 @@ public class MainFood {
     }
 
     public void createDistribution() {
-        distributionImp = new DistributionServiceImp();
+        distributionImp = new DistributionServiceFoodImp();
         // Création des distributions d'aprés l'input
         // Création des distributions d'aprés l'input
         userList.forEach(user -> {
@@ -66,10 +66,13 @@ public class MainFood {
     }
 
     public void calculateUserBalance() {
-        distributionImp.calculateUserBalance(distributions, userList);
+        userList = distributionImp.calculateUserBalance(distributions, userList);
     }
 
-    public void outputResult() {
+    public Map<String, Object>  outputResult() {
+        init();
+        createDistribution();
+        calculateUserBalance();
         try {
             Map<String, Object> map = new HashMap<>();
             map.put("distributions", distributions);
@@ -79,17 +82,15 @@ public class MainFood {
             ObjectMapper mapper = new ObjectMapper();
             // affichage dans un fichier output
             mapper.writeValue(Paths.get(output).toFile(), map);
-
+            return map;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return null;
         }
     }
 
     public static void main(String[] args) {
         MainFood mainGift = new MainFood();
-        mainGift.init();
-        mainGift.createDistribution();
-        mainGift.calculateUserBalance();
         mainGift.outputResult();
     }
 }
