@@ -64,7 +64,7 @@ public class Utils {
     public static Distribution getDistribution(User user, Companie companie, Wallet wallet, float amount) {
         Distribution distribution = null;
         Date today = new Date();
-        if (wallet.getType() == "GIFT") {
+        if (wallet.getType().equals("GIFT")) {
             Calendar c = Calendar.getInstance();
             c.setTime(today);
             c.add(Calendar.DAY_OF_MONTH, 364);
