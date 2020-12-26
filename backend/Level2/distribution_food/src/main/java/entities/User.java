@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private Long id;
-    private float balance;
+    private List<Balance> balance = new ArrayList();
 
-    public User(Long id, float balance) {
+    public User(Long id, List<Balance> balance) {
         this.id = id;
         this.balance = balance;
     }
@@ -13,7 +16,7 @@ public class User {
         return id;
     }
 
-    public float getBalance() {
+    public List<Balance> getBalance() {
         return balance;
     }
 
@@ -21,7 +24,7 @@ public class User {
         this.id = id;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(List<Balance> balance) {
         this.balance = balance;
     }
 

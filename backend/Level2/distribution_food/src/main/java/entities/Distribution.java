@@ -13,14 +13,16 @@ public class Distribution {
     private Date end_date;
     private Long company_id;
     private Long user_id;
+    private Long wallet_id;
 
-    public Distribution(Long id, float amount, Date start_date, Date end_date, Long company_id, Long user_id) {
+    public Distribution(Long id, float amount, Date start_date, Date end_date, Long company_id, Long user_id, Long wallet_id) {
         this.id = id;
         this.amount = amount;
         this.start_date = start_date;
         this.end_date = end_date;
         this.company_id = company_id;
         this.user_id = user_id;
+        this.wallet_id = wallet_id;
     }
 
     public Long getId() {
@@ -71,6 +73,14 @@ public class Distribution {
         this.user_id = user_id;
     }
 
+    public Long getWallet_id() {
+        return wallet_id;
+    }
+
+    public void setWallet_id(Long wallet_id) {
+        this.wallet_id = wallet_id;
+    }
+
     @Override
     public String toString() {
         return "Distribution{" +
@@ -80,6 +90,7 @@ public class Distribution {
                 ", end_date=" + end_date +
                 ", company_id=" + company_id +
                 ", user_id=" + user_id +
+                ", wallet_id=" + wallet_id +
                 '}';
     }
 }

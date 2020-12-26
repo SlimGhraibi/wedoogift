@@ -9,7 +9,7 @@ public class DistributionServiceImp implements DistributionService {
 
     @Override
     public Distribution distributefoodCards(Companie companie, User user, float amount) {
-        
+
         return null;
     }
 }
