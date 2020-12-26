@@ -15,12 +15,12 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Main {
+public class MainGift {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         String input = "data/input.json";
         String output = "output.json";
-        InputStream is = Main.class.getResourceAsStream(input);
+        InputStream is = MainGift.class.getResourceAsStream(input);
 
         if (is == null) {
             throw new NullPointerException("Cannot find resource file " + input);
