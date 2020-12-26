@@ -7,10 +7,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import utils.Utils;
 
-import java.io.IOException;
 import java.io.InputStream;
-
-import java.net.URISyntaxException;
 
 import java.nio.file.Paths;
 import java.util.*;
