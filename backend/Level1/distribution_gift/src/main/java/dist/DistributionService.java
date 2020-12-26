@@ -1,14 +1,14 @@
 package dist;
 
 
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
+import entities_gift.Companie;
+import entities_gift.Distribution;
+import entities_gift.User;
 
 import java.util.List;
 
 public interface DistributionService {
-    public Distribution distributeGiftCards(Companie companie, User user, float amount);
+    Distribution distributeGiftCards(Companie companie, User user, float amount);
 
-    public List<User> calculateUserBalance(List<Distribution> distList, List<User> userList);
+    List<User> calculateUserBalance(List<Distribution> distList, List<User> userList);
 }

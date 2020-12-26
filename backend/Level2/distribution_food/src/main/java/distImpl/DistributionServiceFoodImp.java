@@ -1,10 +1,12 @@
 package distImpl;
 import dist.DistributionServiceFood;
-import entities.*;
+import entities_food.*;
+import org.springframework.stereotype.Service;
 import utils.UtilsFood;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class DistributionServiceFoodImp implements DistributionServiceFood {
 
     @Override

@@ -1,10 +1,10 @@
 package com.example.demo.restController;
 
 import com.example.demo.services.FoodService;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
-import entities.Wallet;
+import entities_food.Companie;
+import entities_food.Distribution;
+import entities_food.User;
+import entities_food.Wallet;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +28,10 @@ import java.util.Map;
 @RequestMapping("/api/food")
 @CrossOrigin
 public class FoodRestService {
-    List<User> userList;
-    List<Companie> companieList;
-    List<Distribution> distributions;
-    List<Wallet> walletList;
-
+    List<User> userList = new ArrayList<>();
+    List<Companie> companieList = new ArrayList<>();
+    List<Distribution> distributions = new ArrayList<>();
+    List<Wallet> walletList = new ArrayList<>();
 
     @Autowired
     FoodService foodService;

@@ -1,6 +1,6 @@
 package utils;
 
-import entities.*;
+import entities_food.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

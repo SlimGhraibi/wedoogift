@@ -1,10 +1,6 @@
 package com.example.demo.services;
 
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
-import org.springframework.stereotype.Component;
-
+import entities_gift.*;
 import java.util.List;
 
 

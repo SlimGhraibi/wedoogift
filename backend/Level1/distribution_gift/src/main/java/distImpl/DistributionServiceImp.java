@@ -1,12 +1,11 @@
 package distImpl;
 
 import dist.DistributionService;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
+import entities_gift.Companie;
+import entities_gift.Distribution;
+import entities_gift.User;
 import utils.Utils;
 import java.util.List;
-
 
 public class DistributionServiceImp implements DistributionService {
 

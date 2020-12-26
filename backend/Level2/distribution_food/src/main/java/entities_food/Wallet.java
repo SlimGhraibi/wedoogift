@@ -1,4 +1,4 @@
-package entities;
+package entities_food;
 
 public class Wallet {
     private Long id;

@@ -1,9 +1,7 @@
 package com.example.demo.restController;
 
 import com.example.demo.services.GiftService;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
+import entities_gift.*;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import utils.Utils;
 import javax.annotation.security.RolesAllowed;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +26,9 @@ import java.util.Map;
 @RequestMapping("/api/gift")
 @CrossOrigin
 public class GiftRestService {
-    List<User> userList;
-    List<Companie> companieList;
-    List<Distribution> distributions;
+    List<User> userList = new ArrayList<>();
+    List<Companie> companieList = new ArrayList<>();
+    List<Distribution> distributions = new ArrayList<>();
 
     @Autowired
     GiftService giftService;

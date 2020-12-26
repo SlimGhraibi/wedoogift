@@ -1,12 +1,14 @@
-package entities;
+package entities_food;
 
-public class User {
+public class Companie {
     private Long id;
     private float balance;
+    private String name;
 
-    public User(Long id, float balance) {
+    public Companie(Long id, float balance, String name) {
         this.id = id;
         this.balance = balance;
+        this.name = name;
     }
 
     public Long getId() {
@@ -17,6 +19,10 @@ public class User {
         return balance;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -25,11 +31,16 @@ public class User {
         this.balance = balance;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "Companie{" +
                 "id=" + id +
                 ", balance=" + balance +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

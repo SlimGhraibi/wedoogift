@@ -1,10 +1,10 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import distImpl.DistributionServiceFoodImp;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
-import entities.Wallet;
+import entities_food.Companie;
+import entities_food.Distribution;
+import entities_food.User;
+import entities_food.Wallet;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import utils.UtilsFood;

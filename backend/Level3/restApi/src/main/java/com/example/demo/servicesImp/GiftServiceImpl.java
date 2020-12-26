@@ -1,26 +1,31 @@
 package com.example.demo.servicesImp;
 
 import com.example.demo.services.GiftService;
-import dist.DistributionService;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import entities_gift.*;
+import org.springframework.stereotype.Service;
+import utils.Utils;
 
 import java.util.List;
 
+@Service
 public class GiftServiceImpl implements GiftService {
-
-    @Autowired
-    private DistributionService distributionService;
 
     @Override
     public Distribution distributeGiftCards(Companie companie, User user, float amount) {
-        return distributionService.distributeGiftCards(companie, user, amount);
+        if (Utils.checkCompanieBalance(companie, amount)) {
+            companie.setBalance(companie.getBalance() - amount);
+            return Utils.getDistribution(user, companie, amount);
+        }
+        return null;
     }
 
     @Override
     public List<User> calculateUserBalance(List<Distribution> distList, List<User> userList) {
-        return distributionService.calculateUserBalance(distList, userList);
+        User user;
+        for (Distribution dist : distList) {
+            user = Utils.getUserByID(userList, dist.getUser_id());
+            user.setBalance(dist.getAmount() + user.getBalance());
+        }
+        return userList;
     }
 }

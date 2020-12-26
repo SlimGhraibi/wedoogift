@@ -1,8 +1,8 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import distImpl.DistributionServiceImp;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
+import entities_gift.Companie;
+import entities_gift.Distribution;
+import entities_gift.User;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import utils.Utils;

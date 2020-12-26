@@ -1,13 +1,10 @@
-package entities;
-
-import java.util.ArrayList;
-import java.util.List;
+package entities_gift;
 
 public class User {
     private Long id;
-    private List<Balance> balance = new ArrayList();
+    private float balance;
 
-    public User(Long id, List<Balance> balance) {
+    public User(Long id, float balance) {
         this.id = id;
         this.balance = balance;
     }
@@ -16,7 +13,7 @@ public class User {
         return id;
     }
 
-    public List<Balance> getBalance() {
+    public float getBalance() {
         return balance;
     }
 
@@ -24,7 +21,7 @@ public class User {
         this.id = id;
     }
 
-    public void setBalance(List<Balance> balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 

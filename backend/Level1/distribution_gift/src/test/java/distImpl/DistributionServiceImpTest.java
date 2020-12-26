@@ -1,8 +1,8 @@
 package distImpl;
 import static org.assertj.core.api.Assertions.assertThat;
-import entities.Companie;
-import entities.Distribution;
-import entities.User;
+import entities_gift.Companie;
+import entities_gift.Distribution;
+import entities_gift.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

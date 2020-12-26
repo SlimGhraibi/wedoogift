@@ -1,4 +1,4 @@
-package entities;
+package entities_gift;
 
 public class Companie {
     private Long id;
