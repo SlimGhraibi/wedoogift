@@ -1,7 +1,7 @@
 package distImpl;
 import dist.DistributionServiceFood;
 import entities.*;
-import utils.Utils;
+import utils.UtilsFood;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +9,9 @@ public class DistributionServiceFoodImp implements DistributionServiceFood {
 
     @Override
     public Distribution distributefoodCards(Companie companie, User user, Wallet wallet, float amount) {
-        if (Utils.checkCompanieBalance(companie, amount)) {
+        if (UtilsFood.checkCompanieBalance(companie, amount)) {
             companie.setBalance(companie.getBalance() - amount);
-            return Utils.getDistribution(user, companie, wallet, amount);
+            return UtilsFood.getDistribution(user, companie, wallet, amount);
         }
         return null;
     }
@@ -20,8 +20,8 @@ public class DistributionServiceFoodImp implements DistributionServiceFood {
     public List<User> calculateUserBalance(List<Distribution> distList, List<User> userList) {
         User user;
         for (Distribution dist : distList) {
-            user = Utils.getUserByID(userList, dist.getUser_id());
-            if (Utils.checkWalletId(user.getBalance(), dist.getWallet_id())) {
+            user = UtilsFood.getUserByID(userList, dist.getUser_id());
+            if (UtilsFood.checkWalletId(user.getBalance(), dist.getWallet_id())) {
                 user.getBalance().forEach(balance -> {
                     if (balance.getWallet_id() == dist.getWallet_id()) {
                         balance.setAmount(balance.getAmount() + dist.getAmount());

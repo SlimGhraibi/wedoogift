@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class Utils {
+public class UtilsFood {
     static Long idDistribution = 1L;
     public static List<Companie> getCompanies(JSONObject object) {
         List<Companie> companyList = new ArrayList();

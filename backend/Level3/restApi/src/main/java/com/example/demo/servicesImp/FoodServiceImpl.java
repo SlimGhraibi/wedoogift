@@ -13,7 +13,7 @@ import java.util.List;
 public class FoodServiceImpl implements FoodService {
 
     @Autowired
-    DistributionServiceFood distributionServiceFood;
+    private DistributionServiceFood distributionServiceFood;
 
     @Override
     public Distribution distributefoodCards(Companie companie, User user, Wallet wallet, float amount) {

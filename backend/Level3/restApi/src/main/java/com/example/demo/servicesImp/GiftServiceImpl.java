@@ -12,7 +12,7 @@ import java.util.List;
 public class GiftServiceImpl implements GiftService {
 
     @Autowired
-    DistributionService distributionService;
+    private DistributionService distributionService;
 
     @Override
     public Distribution distributeGiftCards(Companie companie, User user, float amount) {

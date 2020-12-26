@@ -7,7 +7,7 @@ import entities.User;
 import entities.Wallet;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import utils.Utils;
+import utils.UtilsFood;
 
 import java.io.InputStream;
 
@@ -36,15 +36,14 @@ public class MainFood {
         }
         JSONTokener tokener = new JSONTokener(is);
         JSONObject object = new JSONObject(tokener);
-        userList = Utils.getUsers(object);
-        companieList = Utils.getCompanies(object);
-        walletList = Utils.getWallets(object);
+        userList = UtilsFood.getUsers(object);
+        companieList = UtilsFood.getCompanies(object);
+        walletList = UtilsFood.getWallets(object);
         distributions = new ArrayList<>();
     }
 
     public void createDistribution() {
         distributionImp = new DistributionServiceFoodImp();
-        // Création des distributions d'aprés l'input
         // Création des distributions d'aprés l'input
         userList.forEach(user -> {
             Distribution dist;
